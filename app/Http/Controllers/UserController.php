@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
-    public function welcome()
-    {
-        return view('auth.welcome');
-    }
-
     public function index()
     {
         $beasiswa = DataBeasiswa::all();
@@ -45,7 +40,7 @@ class UserController extends Controller
             'jumlah' => $request->jumlah,
         ]);
 
-        return redirect('beasiswa.create')->with('success', 'beasiswa berhasil ditambahkan!');
+        return redirect('beasiswa')->with('success', 'beasiswa berhasil ditambahkan!');
 
     }
 
@@ -55,18 +50,32 @@ class UserController extends Controller
         return view('beasiswa.edit', compact('beasiswa'));
     }
 
-function update(Request $request, $id)
-{
-    $beasiswa = DataBeasiswa::find($id);
-    $beasiswa->nama = $request->nama;
-    $beasiswa->deskripsi = $request->deskripsi;
-    $beasiswa->tanggal_mulai = $request->tanggal_mulai;
-    $beasiswa->tanggal_berakhir = $request->tanggal_berakhir;
-    $beasiswa->jumlah = $request->jumlah;
-    $beasiswa->update();
-
-    return redirect()->route('beasiswa.index');
-}
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_berakhir' => 'required|date',
+            'jumlah' => 'required|integer',
+        ]);
+    
+        $beasiswa = DataBeasiswa::find($id);
+    
+        if (!$beasiswa) {
+            return redirect()->route('beasiswa.index')->with('error', 'Beasiswa tidak ditemukan');
+        }
+    
+        $beasiswa->update([
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_berakhir' => $request->tanggal_berakhir,
+            'jumlah' => $request->jumlah,
+        ]);
+    
+        return redirect()->route('beasiswa.index')->with('success', 'Beasiswa berhasil diperbarui!');
+    }    
 
 public function show($id)
     {

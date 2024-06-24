@@ -3,8 +3,9 @@
 @section('konten')
 
 <h4>Edit Beasiswa</h4>
-<form action="{{ route('beasiswa.edit' , $beasiswa->id) }}" method="post">
+<form action="{{ route('beasiswa.update', $beasiswa->id) }}" method="POST">
     @csrf
+    @method('PUT')
     <label>Nama</label>
     <input type="text" name="nama" value="{{ $beasiswa->nama }}" class="form-control mb-2">
     <label>Deskripsi</label>
