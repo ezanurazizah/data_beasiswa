@@ -1,14 +1,17 @@
 <?php
 
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('welcome', function () {
     return view('welcome');
 });
-Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('user',UserController::class);
-
+Route::get('welcome', [UserController::class, 'welcome'])->name('auth.welcome');
+Route::get('beasiswa', [UserController::class, 'index'])->name('beasiswa.index');
+Route::get('beasiswa/create', [UserController::class, 'tambah'])->name('beasiswa.create');
+Route::post('beasiswa/store', [UserController::class, 'store'])->name('beasiswa.store');
+Route::get('beasiswa/edit/{id}', [UserController::class, 'edit'])->name('beasiswa.edit');
+Route::post('beasiswa/update/{id}', [UserController::class, 'update'])->name('beasiswa.update');
+Route::post('beasiswa/destroy/{id}', [UserController::class, 'destroy'])->name('beasiswa.destroy');
+Route::get('beasiswa/show/{id}', [UserController::class, 'show'])->name('beasiswa.show');

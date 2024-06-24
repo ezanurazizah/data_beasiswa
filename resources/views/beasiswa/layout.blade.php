@@ -8,8 +8,11 @@
   <link rel="stylesheet" href="{{ asset('leaning-peach/css/bootstrap.css') }}">
 </head>
 <body>
-  <h1 class="text-center mt-3">Data</h1>
+  <h1 class="text-center mt-3">Data Beasiswa</h1>
 
   <div class="mt-3">
     @yield('konten')
   </div>
+  
+</body>
+</html>
