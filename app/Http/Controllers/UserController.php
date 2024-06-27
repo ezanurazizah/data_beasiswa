@@ -10,5 +10,5 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
-    //  
+    // 
 }

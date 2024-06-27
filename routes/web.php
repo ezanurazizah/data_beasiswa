@@ -5,7 +5,6 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
-
 Route::get('/', [HomeController::class, 'index']);
 
 Route::get('beasiswa', [BeasiswaController::class, 'index'])->name('beasiswa.index');
@@ -15,4 +14,3 @@ Route::get('beasiswa/edit/{id}', [BeasiswaController::class, 'edit'])->name('bea
 Route::post('beasiswa/update/{id}', [BeasiswaController::class, 'update'])->name('beasiswa.update');
 Route::post('beasiswa/destroy/{id}', [BeasiswaController::class, 'destroy'])->name('beasiswa.destroy');
 Route::get('beasiswa/show/{id}', [BeasiswaController::class, 'show'])->name('beasiswa.show');
-// Route::resource('beasiswa', BeasiswaController::class);
