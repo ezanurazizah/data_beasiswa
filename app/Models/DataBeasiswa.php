@@ -21,4 +21,9 @@ class DataBeasiswa extends Model
         'tanggal_berakhir',
         'jumlah',
     ];
+
+    public function pendaftar()
+    {
+        return $this->hasMany(Pendaftar::class, 'data_beasiswa_id');
+    }
 }
