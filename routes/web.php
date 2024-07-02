@@ -14,9 +14,13 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('login', [UserController::class, 'LoginForm'])->name('login');
 Route::post('login', [UserController::class, 'login'])->name('login');
 
+// rute untuk register
+Route::get('register', [UserController::class, 'registerForm'])->name('register');
+Route::post('register', [UserController::class, 'register'])->name('register');
+
 
 // Rute untuk logout
-Route::post('logout', [UserController::class, 'logout'])->name('logout');
+Route::get('logout', [UserController::class, 'logout']);
 
 // Rute yang memerlukan otentikasi
 Route::middleware(['auth'])->group(function () {

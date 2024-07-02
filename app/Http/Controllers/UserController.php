@@ -32,6 +32,25 @@ class UserController extends Controller
         ]);
     }
 
+    public function registerForm()
+    {
+        return view('auth.register');
+    }
+
+    public function register(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // Jika berhasil melakukan otentikasi...
+            return redirect()->intended('/');
+        }
+
+        return back()->withErrors([
+            'email' => 'Email atau kata sandi yang Anda masukkan salah.',
+        ]);
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();
