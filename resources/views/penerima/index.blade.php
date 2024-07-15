@@ -36,7 +36,7 @@
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->telepon }}</td>
                     <td>{{ $item->alamat }}</td>
-                    <td>{{ $item->dataBeasiswa->nama }}</td>
+                    <td>{{ $item->dataBeasiswa ? $item->dataBeasiswa->nama : 'Tidak ada data beasiswa' }}</td>
                     <td>
                         <form action="{{ route('pendaftar.destroy', $item->id) }}" method="POST">
                             <a class="btn btn-info" href="{{ route('pendaftar.show', $item->id) }}">Detail</a>

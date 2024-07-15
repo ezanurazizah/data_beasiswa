@@ -16,8 +16,7 @@
 
 <table class="table container">
     <tr>
-        <th>No</th>
-        <th>Nama Pendaftar</th>
+        <th>Nama </th>
         <th>Email</th>
         <th>No Telepon</th>
         <th>Alamat</th>
@@ -26,7 +25,6 @@
     </tr>
     @foreach ($pendaftar as $index => $item)
     <tr>
-        <td>{{ $index + 1 }}</td>
         <td>{{ $item->nama }}</td>
         <td>{{ $item->email }}</td>
         <td>{{ $item->telepon }}</td>

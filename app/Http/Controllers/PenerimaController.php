@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataBeasiswa;
-use App\Models\pendaftar;
-use App\Models\penerima;
+use App\Models\Pendaftar;
+use App\Models\Penerima;
 use Illuminate\Http\Request;
 
 class PenerimaController extends Controller
@@ -13,18 +13,17 @@ class PenerimaController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    $pendaftar = Pendaftar::with('dataBeasiswa')->get();
-    return view('penerima.index', compact('pendaftar'));
-}
-
+    {
+        $pendaftar = Pendaftar::with('dataBeasiswa')->get();
+        return view('penerima.index', compact('pendaftar'));
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        $pendaftar = pendaftar::all();
+        $pendaftar = Pendaftar::all();
         $beasiswa = DataBeasiswa::all();
         return view('penerima.create', compact('pendaftar', 'beasiswa'));
     }
@@ -39,27 +38,28 @@ class PenerimaController extends Controller
             'data_beasiswa_id' => 'required',
         ]);
 
-        penerima::create($request->all());
+        Penerima::create($request->all());
 
         return redirect()->route('penerima.index')
-                        ->with('success', 'penerima created successfully.');
+                        ->with('success', 'Penerima created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
+        $penerima = Penerima::findOrFail($id);
         return view('penerima.show', compact('penerima'));
-
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        $pendaftar = pendaftar::all();
+        $penerima = Penerima::findOrFail($id);
+        $pendaftar = Pendaftar::all();
         $beasiswa = DataBeasiswa::all();
         return view('penerima.edit', compact('penerima', 'pendaftar', 'beasiswa'));
     }
@@ -67,25 +67,26 @@ class PenerimaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, penerima $penerima)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'pendaftar_id' => 'required',
             'data_beasiswa_id' => 'required',
         ]);
 
+        $penerima = Penerima::findOrFail($id);
         $penerima->update($request->all());
 
         return redirect()->route('penerima.index')
-                        ->with('success', 'penerima updated successfully.');
+                        ->with('success', 'Penerima updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $penerima)
+    public function destroy($id)
     {
-        $penerima = penerima::findOrFail($penerima);
+        $penerima = Penerima::findOrFail($id);
         $penerima->delete();
         return redirect()->route('penerima.index')->with('success', 'Penerima berhasil dihapus!');
     }
